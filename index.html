@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de ponto</title>
+    <link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lilita+One&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h2>Calculadora de jornada</h2>
+    </header>
+
+<main>
+    <div class="container">
+
+        <div class="campo">
+            <label>Escolha o tipo de jornada</label>
+            <div class="opcoes-jornada">
+                <label for="quatro-marcacoes">
+                    <input type="radio" id="quatro-marcacoes" checked name="modo-jornada" value="quatro" onchange="toggleCampoExtra()">
+                    <span>
+                        Quatro marcações
+                    </span>
+            
+                </label>
+                <label for="quantidadeMarcacoes">
+                    <input type="radio" id="seis-marcacoes" name="modo-jornada" value="seis" onchange="toggleCampoExtra()">
+                    <span>
+                        Seis marcações
+                    </span>
+                   
+                </label>
+            </div>
+        </div>
+        
+        
+
+    <div class="calculadora">
+        <div class="campo">
+            <label for="entrada">Hora da entrada</label>
+            <input type="time" id="entrada" name="entrada">
+        </div>
+
+        <div class="campo"> 
+            <label for="saida-cafe">Primeira saída</label>
+            <input type="time" id="saida-cafe" name="saida-cafe">
+        </div>
+
+        <div class="campo"> 
+            <label for="entrada-cafe">Segunda entrada</label>
+            <input type="time" id="entrada-cafe" name="entrada-cafe">
+        </div>
+        
+        <div class="campo extra" id="campoExtra" style="display: none;"> 
+            <label for="segunda-saida">Segunda saída</label>
+            <input type="time" id="segunda-saida" name="segunda-saida">
+
+            <label for="segunda-entrada">Segunda entrada</label>
+            <input type="time" id="segunda-entrada" name="segunda-entrada">
+        </div>
+
+        <div class="botoes">
+            <button id="calcular">Calcular</button>
+            <button id="resetar">Resetar</button>
+        </div>
+
+        <div id="resultado"></div>
+
+    </div>
+
+</div>
+
+</main>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="https://webapp.confianca.com.br/consultaponto/ponto.aspx" target="_blank" rel="noopener noreferrer">Consulta Ponto
+                </a>
+            </li>
+            <li>
+                <a href="index.html">
+                <img src="imagens/menu/confianca.png" alt="Logo Confiança" class="confi">
+            </a>
+            </li> 
+            <li>
+                <a href="https://portalfuncionario.confianca.com.br/" target="_blank" rel="noopener noreferrer">Portal funcionário
+            </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="observacao-legal">
+        Observação: esta calculadora tem caráter informativo e auxilia no controle de jornada. O Confiança orienta que jornadas superiores ao estabelecido em contrato sejam comunicadas e justificadas, evitando a ocorrência de horas extras não autorizadas.
+    </div>
+    
+
+
+
+<script src="java/script.js"></script>
+
+
+</body>
+</html>
