@@ -335,12 +335,12 @@ nav ul li a:hover {
   display: block;
 }
 
-/* Menu Responsivo para telas pequenas */
+/* Responsividade para telas pequenas */
 @media screen and (max-width: 768px) {
   #menu {
-    width: 100%; /* O menu vai ocupar toda a largura da tela */
-    height: auto; /* O menu vai ajustar sua altura automaticamente */
-    position: relative; /* O menu vai ter posição relativa, não fixa */
+    width: 100%;
+    height: auto;
+    position: relative;
   }
 
   #menu ul li {
@@ -351,11 +351,70 @@ nav ul li a:hover {
     font-size: 18px;
   }
 
+  h2 {
+    font-size: 1.8rem;
+    top: 40px;
+  }
 
-/* Menu fixo para telas maiores */
+  body {
+    padding: 0 10px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 30px;
+    padding: 10px;
+  }
+
+  .marcacoes {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .botoes {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .botoes button {
+    width: 100%;
+  }
+
+  .campo input[type="time"] {
+    font-size: 0.8rem;
+  }
+
+  .resultado {
+    font-size: 0.85rem;
+  }
+
+  .opcoes-jornada {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .observacao-legal {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  li {
+    margin: 0;
+  }
+}
+
+/* Responsividade para telas grandes */
 @media screen and (min-width: 769px) {
   #menu {
-    width: 250px; /* O menu ocupa 250px de largura em telas grandes */
+    width: 250px;
   }
-} 
 }
