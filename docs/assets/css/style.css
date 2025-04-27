@@ -307,9 +307,9 @@ nav ul li a:hover {
 
   h2 {
     font-size: 1.8rem;
-    margin-top: 80px;
+    margin-top: 20px;
     margin-bottom: 20px;
-    padding: 40px;
+    padding: 5px;
   }
 
     .observacao-legal {
@@ -327,13 +327,22 @@ nav ul li a:hover {
       justify-content: center;
   }
 
+  
+  .input {
+    justify-content: center;
+  }
+
+}
+
+
+
     @media (max-width: 300px) {
       .observacao-legal {
         max-width: 90%;
         font-size: 8px;
         padding: 5px;
         white-space: normal;
-        margin-top: 20px;
+        margin-top: 10px;
       }
 
       .campo input[type="time"] {
@@ -343,30 +352,39 @@ nav ul li a:hover {
         justify-content: center;
     }
 
+    
+    .input {
+      justify-content: center;
+    }
+
   }
     
     @media (max-width: 400px) {
 
       h2 {
         font-size: 1.8rem;
-        margin-top: 80px;
+        margin-top: 20px;
         margin-bottom: 20px;
-        padding: 100px;
+        padding: 5px;
       }
 
       .container {
         padding: 20px;
       }
+
       .campo input[type="time"] {
         font-size: 1rem;
         align-items: center;
         justify-content: center;
         position: relative;
-
       }
+
       .botoes button {
         font-size: 0.9rem;
       }
+
+    .input {
+      justify-content: center;
     }
 
   }
