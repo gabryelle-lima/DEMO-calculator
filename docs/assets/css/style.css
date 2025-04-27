@@ -69,7 +69,6 @@ nav ul {
   gap: 40px;
   padding: 0;
   margin: auto;
-  list-style: none;
   max-width: 100%;
 }
 
@@ -168,7 +167,7 @@ nav ul li a:hover {
   flex-wrap: wrap;
   max-width: 500px;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 30px;
   font-weight: normal;
 }
 
@@ -181,6 +180,8 @@ nav ul li a:hover {
   cursor: pointer;
   transition: background-color 0.3s;
   text-align: center;
+  width: calc(50% - 20px);
+  margin-bottom: 10px;
 }
 
 .marcacao:hover {
@@ -252,6 +253,8 @@ nav ul li a:hover {
   flex-direction: row;
   gap: 20px;
   font-size: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .opcoes-jornada label {
@@ -259,6 +262,7 @@ nav ul li a:hover {
   align-items: center;
   cursor: pointer;
   padding: 5px;
+  max-width: 100%;
 }
 
 .opcoes-jornada input[type="radio"] {
@@ -266,48 +270,8 @@ nav ul li a:hover {
   accent-color: #4caf50;
 }
 
-.opcoes-jornada label input[type="radio"]:checked + span {
-  font-weight: bold;
-  color: #4caf50;
-}
-
-.opcoes-jornada label:hover{
-  background-color: #f0f0f0;
-  border-radius: 5px;
-}
-
-.span {
-  font-weight: normal;
-}
-
 .opcoes-jornada label:hover {
   background-color: #f0f0f0;
-  border-radius: 5px;
-}
-
-.observacao-legal {
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  color: #555;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 5px 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  max-width: 90%;
-  text-align: center;
-}
-
-.erro {
-  color: red;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  padding: 10px;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
   border-radius: 5px;
 }
 
@@ -340,80 +304,11 @@ nav ul li a:hover {
     font-size: 16px;
     width: 100%;
   }
-}
 
-@media screen and (max-width: 768px) {
-  .container {
-    max-width: 90%;
-    padding: 15px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .container {
-    max-width: 100%;
-    padding: 10px;
-  }
-}
-
-.marcacoes {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  max-width: 500px;
-  width: 100%;
-  margin-top: 30px;
-  font-weight: normal;
-}
-
-.marcacao {
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  background-color: #4caf50;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  text-align: center;
-  width: calc(50% - 20px);
-  margin-bottom: 10px;
-}
-
-@media screen and (max-width: 480px) {
   .marcacao {
-    width: 100%;
+    width: calc(100% - 20px);
   }
-}
 
-.opcoes-jornada {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  font-size: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.opcoes-jornada label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 5px;
-  max-width: 100%;
-}
-
-.opcoes-jornada input[type="radio"] {
-  margin-right: 10px;
-  accent-color: #4caf50;
-}
-
-.opcoes-jornada label:hover {
-  background-color: #f0f0f0;
-  border-radius: 5px;
-}
-
-@media screen and (max-width: 768px) {
   .opcoes-jornada {
     flex-direction: column;
     align-items: flex-start;
@@ -423,22 +318,20 @@ nav ul li a:hover {
   .opcoes-jornada label {
     width: 100%;
   }
-}
 
-nav ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  gap: 20px;
-  padding: 0;
-  margin: auto;
-  max-width: 100%;
-}
-
-@media screen and (max-width: 768px) {
   nav ul {
     flex-direction: column;
     gap: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .marcacao {
+    width: 100%;
   }
 }
