@@ -312,7 +312,6 @@ nav ul li a:hover {
     padding: 10px;
   }
 
-  @media (max-width: 600px) {
     .observacao-legal {
       max-width: 80%; 
     font-size: 9px; 
@@ -329,7 +328,13 @@ nav ul li a:hover {
         white-space: normal;
         margin-top: 20px;
       }
+
+      .campo input[type="time"] {
+        font-size: 1rem;
+        align-items: center;
     }
+
+  }
     
     @media (max-width: 400px) {
       .container {
@@ -337,6 +342,7 @@ nav ul li a:hover {
       }
       .campo input[type="time"] {
         font-size: 1rem;
+        align-items: center;
       }
       .botoes button {
         font-size: 0.9rem;
@@ -344,4 +350,4 @@ nav ul li a:hover {
     }
 
   }
-}
+
