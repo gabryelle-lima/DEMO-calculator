@@ -257,6 +257,7 @@ nav ul li a:hover {
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 5px;
 }
 
 .opcoes-jornada input[type="radio"] {
@@ -267,6 +268,11 @@ nav ul li a:hover {
 .opcoes-jornada label input[type="radio"]:checked + span {
   font-weight: bold;
   color: #4caf50;
+}
+
+.opcoes-jornada label:hover{
+  background-color: #f0f0f0;
+  border-radius: 5px;
 }
 
 .span {
@@ -304,6 +310,18 @@ nav ul li a:hover {
   border-radius: 5px;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
+  .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
 
+  .campo {
+      width: 90%;
+      max-width: 400px;
+      margin-bottom: 10px;
+  }
 }
