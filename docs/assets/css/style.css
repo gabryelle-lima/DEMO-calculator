@@ -332,6 +332,7 @@ nav ul li a:hover {
       .campo input[type="time"] {
         font-size: 1rem;
         align-items: center;
+        position: absolute;
     }
 
   }
@@ -343,6 +344,7 @@ nav ul li a:hover {
       .campo input[type="time"] {
         font-size: 1rem;
         align-items: center;
+        position: absolute;
       }
       .botoes button {
         font-size: 0.9rem;
