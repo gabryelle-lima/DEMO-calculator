@@ -303,18 +303,3 @@ nav ul li a:hover {
   border: 1px solid #f5c6cb;
   border-radius: 5px;
 }
-
-@media (max-width: 768px) {
-  .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-  }
-
-  .campo {
-      width: 90%;
-      max-width: 400px;
-  }
-}
