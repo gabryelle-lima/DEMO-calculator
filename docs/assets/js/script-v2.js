@@ -3,11 +3,33 @@ document.getElementById('resetar').addEventListener('click', resetFields);
 
 function toggleCampoExtra() {
   const mode = document.querySelector('input[name="modo-jornada"]:checked').value;
-  console.log(mode);
   document.getElementById('campoExtra').style.display = mode === 'seis' ? 'block' : 'none';
 }
 
+function validateFields() {
+  const mode = document.querySelector('input[name="modo-jornada"]:checked').value;
+  const requiredFields = ['entrada', 'saida-cafe', 'entrada-cafe'];
+
+  if (mode === 'seis') {
+    requiredFields.push('segunda-saida', 'segunda-entrada');
+  }
+
+  for (const id of requiredFields) {
+    const campo = document.getElementById(id);
+    if (!campo.value) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function calculateExitTime() {
+  if (!validateFields()) {
+    document.getElementById('resultado').innerHTML = '<span class="erro">Preencha todos os horários!</span>';
+    document.getElementById('resultado').style.display = 'block';
+    return;
+  }
+
   const mode = document.querySelector('input[name="modo-jornada"]:checked').value;
   const jornadaBase = 7 + 20 / 60;
   const extraHours = 2;
@@ -45,7 +67,6 @@ function calculateExitTime() {
     const discountHours = nightShiftMinutes / 60;
 
     suggestedExit = e3 + remaining;
-
     suggestedExit -= discountHours;
 
     limitExit = suggestedExit + extraHours;
@@ -63,7 +84,6 @@ function calculateNightShiftMinutes(start, end) {
   let totalMinutes = 0;
 
   if (start > end) {
-  
     totalMinutes += calculateNightShiftMinutesBetween(start, 24, 22, 5);
     totalMinutes += calculateNightShiftMinutesBetween(0, end, 22, 5);
   } else {
@@ -103,14 +123,14 @@ function displayResult(suggestedExit, limitExit) {
   }
 
   document.getElementById('resultado').innerHTML = `
-  <span class="hora-sugerida">Saída sugerida: ${format(suggestedExit)}</span>
+    <span class="hora-sugerida">Saída sugerida: ${format(suggestedExit)}</span>
     <span class="hora-limite">Horário limite: ${format(limitExit)}</span>
   `;
   document.getElementById('resultado').style.display = 'block';
 }
 
 function resetFields() {
-  ['entrada','saida-cafe','entrada-cafe','segunda-saida','segunda-entrada']
+  ['entrada', 'saida-cafe', 'entrada-cafe', 'segunda-saida', 'segunda-entrada']
     .forEach(id => document.getElementById(id).value = '');
   document.getElementById('resultado').innerHTML = '';
   document.getElementById('quatro-marcacoes').checked = true;
