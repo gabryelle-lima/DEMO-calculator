@@ -9,7 +9,7 @@ function toggleCampoExtra() {
 
 function calculateExitTime() {
   const mode = document.querySelector('input[name="modo-jornada"]:checked').value;
-  const jornadaBase = 7 + 20 / 60; // 7h20m = 7.333h
+  const jornadaBase = 7 + 20 / 60;
   const extraHours = 2;
 
   let suggestedExit, limitExit;
@@ -19,12 +19,9 @@ function calculateExitTime() {
     const s1 = convertToDecimal(document.getElementById('saida-cafe').value);
     const e2 = convertToDecimal(document.getElementById('entrada-cafe').value);
 
-    // intervalo de café
     const intervalo = e2 - s1;
-    // saída base (entrada + jornada + intervalo)
     const baseExit = e1 + jornadaBase + intervalo;
 
-    // desconto de adicional noturno apenas no primeiro bloco
     const nightShiftMinutes = calculateNightShiftMinutes(e1, s1);
     const discountHours = nightShiftMinutes / 60;
 
@@ -38,22 +35,17 @@ function calculateExitTime() {
     const s2 = convertToDecimal(document.getElementById('segunda-saida').value);
     const e3 = convertToDecimal(document.getElementById('segunda-entrada').value);
 
-    // tempo trabalhado em cada sessão
     const work1 = s1 - e1;
     const work2 = s2 - e2;
     const totalWorked = work1 + work2;
 
-    // quanto falta para completar 7h20m
     const remaining = jornadaBase - totalWorked;
 
-    // desconto noturno sobre o primeiro bloco
     const nightShiftMinutes = calculateNightShiftMinutes(e1, s1);
     const discountHours = nightShiftMinutes / 60;
 
-    // primeiro, calcula o tempo final corretamente sem o desconto
     suggestedExit = e3 + remaining;
 
-    // depois, aplica o desconto do adicional noturno apenas sobre o primeiro bloco
     suggestedExit -= discountHours;
 
     limitExit = suggestedExit + extraHours;
@@ -70,16 +62,14 @@ function convertToDecimal(time) {
 function calculateNightShiftMinutes(start, end) {
   let totalMinutes = 0;
 
-  // Ajuste para quando a jornada cruza a meia-noite
   if (start > end) {
-    // Se a hora de início for maior que a hora de término, significa que a jornada cruzou a meia-noite
-    totalMinutes += calculateNightShiftMinutesBetween(start, 24, 22, 5); // do início até meia-noite
-    totalMinutes += calculateNightShiftMinutesBetween(0, end, 22, 5); // da meia-noite até a saída
+  
+    totalMinutes += calculateNightShiftMinutesBetween(start, 24, 22, 5);
+    totalMinutes += calculateNightShiftMinutesBetween(0, end, 22, 5);
   } else {
-    totalMinutes += calculateNightShiftMinutesBetween(start, end, 22, 5); // sem cruzar a meia-noite
+    totalMinutes += calculateNightShiftMinutesBetween(start, end, 22, 5);
   }
 
-  // desconto de 8.5 minutos por hora noturna
   const hoursInNightShift = totalMinutes / 60;
   return hoursInNightShift * 8.5;
 }
@@ -104,12 +94,10 @@ function displayResult(suggestedExit, limitExit) {
     return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
   };
 
-  // Garantir que a hora sugerida não exceda 24 horas (evitar resultados como 29:49)
   if (suggestedExit >= 24) {
-    suggestedExit -= 24; // Ajuste para garantir que a hora sugerida não ultrapasse 24 horas
+    suggestedExit -= 24;
   }
 
-  // Ajustar para que o horário limite também não ultrapasse 24 horas
   if (limitExit >= 24) {
     limitExit -= 24;
   }
