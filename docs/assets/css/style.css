@@ -151,7 +151,7 @@ nav ul li a:hover {
   justify-content: center;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
   height: auto;
   padding: 10px;
@@ -312,6 +312,7 @@ nav ul li a:hover {
 
 @media screen and (max-width: 768px) {
   .container {
+    max-width: 90%;
     padding: 15px;
   }
 
@@ -340,25 +341,103 @@ nav ul li a:hover {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .container {
-    padding: 10px;
-  }
-
-  .form-group label {
-    font-size: 14px;
-  }
-
-  input[type="time"],
-  input[type="radio"],
-  button {
-    font-size: 14px;
+    max-width: 90%;
+    padding: 15px;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 480px) {
   .container {
-    max-width: 1140px;
-    padding: 30px;
+    max-width: 100%;
+    padding: 10px;
+  }
+}
+
+.marcacoes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  width: 100%;
+  margin-top: 20px;
+  font-weight: normal;
+}
+
+.marcacao {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  width: calc(50% - 20px);
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 480px) {
+  .marcacao {
+    width: 100%;
+  }
+}
+
+.opcoes-jornada {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  font-size: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.opcoes-jornada label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  max-width: 100%;
+}
+
+.opcoes-jornada input[type="radio"] {
+  margin-right: 10px;
+  accent-color: #4caf50;
+}
+
+.opcoes-jornada label:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .opcoes-jornada {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .opcoes-jornada label {
+    width: 100%;
+  }
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+  margin: auto;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
   }
 }
