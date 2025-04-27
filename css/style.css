@@ -304,58 +304,6 @@ nav ul li a:hover {
   border-radius: 5px;
 }
 
-
-/* Estilo base do menu */
-#menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 100%;
-  background-color: #333;
-  color: white;
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
-
-#menu ul {
-  padding: 0;
-  list-style-type: none;
-  margin: 0;
-}
-
-#menu ul li {
-  padding: 10px;
-  text-align: center;
-}
-
-#menu ul li a {
-  color: white;
-  text-decoration: none;
-  display: block;
-}
-
-/* Menu Responsivo para telas pequenas */
 @media screen and (max-width: 768px) {
-  #menu {
-    width: 100%; /* O menu vai ocupar toda a largura da tela */
-    height: auto; /* O menu vai ajustar sua altura automaticamente */
-    position: relative; /* O menu vai ter posição relativa, não fixa */
-  }
 
-  #menu ul li {
-    padding: 15px;
-  }
-
-  #menu ul li a {
-    font-size: 18px;
-  }
-
-
-/* Menu fixo para telas maiores */
-@media screen and (min-width: 769px) {
-  #menu {
-    width: 250px; /* O menu ocupa 250px de largura em telas grandes */
-  }
-} 
 }

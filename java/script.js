@@ -14,22 +14,10 @@ function calculateExitTime() {
 
   let suggestedExit, limitExit;
 
-  // Verificar se todos os campos de horário foram preenchidos
-  const entrada = document.getElementById('entrada').value;
-  const saidaCafe = document.getElementById('saida-cafe').value;
-  const entradaCafe = document.getElementById('entrada-cafe').value;
-  const segundaSaida = document.getElementById('segunda-saida').value;
-  const segundaEntrada = document.getElementById('segunda-entrada').value;
-
-  if (!entrada || !saidaCafe || !entradaCafe || !segundaSaida || !segundaEntrada) {
-    displayErrorMessage("Por favor, preencha todos os horários.");
-    return; // Se algum horário estiver faltando, interrompe o cálculo
-  }
-
   if (mode === 'quatro') {
-    const e1 = convertToDecimal(entrada);
-    const s1 = convertToDecimal(saidaCafe);
-    const e2 = convertToDecimal(entradaCafe);
+    const e1 = convertToDecimal(document.getElementById('entrada').value);
+    const s1 = convertToDecimal(document.getElementById('saida-cafe').value);
+    const e2 = convertToDecimal(document.getElementById('entrada-cafe').value);
 
     // intervalo de café
     const intervalo = e2 - s1;
@@ -44,11 +32,11 @@ function calculateExitTime() {
     limitExit = suggestedExit + extraHours;
 
   } else if (mode === 'seis') {
-    const e1 = convertToDecimal(entrada);
-    const s1 = convertToDecimal(saidaCafe);
-    const e2 = convertToDecimal(entradaCafe);
-    const s2 = convertToDecimal(segundaSaida);
-    const e3 = convertToDecimal(segundaEntrada);
+    const e1 = convertToDecimal(document.getElementById('entrada').value);
+    const s1 = convertToDecimal(document.getElementById('saida-cafe').value);
+    const e2 = convertToDecimal(document.getElementById('entrada-cafe').value);
+    const s2 = convertToDecimal(document.getElementById('segunda-saida').value);
+    const e3 = convertToDecimal(document.getElementById('segunda-entrada').value);
 
     // tempo trabalhado em cada sessão
     const work1 = s1 - e1;
@@ -62,8 +50,12 @@ function calculateExitTime() {
     const nightShiftMinutes = calculateNightShiftMinutes(e1, s1);
     const discountHours = nightShiftMinutes / 60;
 
-    // saída sugerida: após segunda entrada + remaining - desconto
-    suggestedExit = e3 + remaining - discountHours;
+    // primeiro, calcula o tempo final corretamente sem o desconto
+    suggestedExit = e3 + remaining;
+
+    // depois, aplica o desconto do adicional noturno apenas sobre o primeiro bloco
+    suggestedExit -= discountHours;
+
     limitExit = suggestedExit + extraHours;
   }
 
@@ -77,15 +69,32 @@ function convertToDecimal(time) {
 
 function calculateNightShiftMinutes(start, end) {
   let totalMinutes = 0;
-  for (let m = Math.floor(start * 60); m < end * 60; m++) {
-    const hour = (m / 60) % 24;
-    if (hour >= 22 || hour < 5) {
-      totalMinutes += 1;
-    }
+
+  // Ajuste para quando a jornada cruza a meia-noite
+  if (start > end) {
+    // Se a hora de início for maior que a hora de término, significa que a jornada cruzou a meia-noite
+    totalMinutes += calculateNightShiftMinutesBetween(start, 24, 22, 5); // do início até meia-noite
+    totalMinutes += calculateNightShiftMinutesBetween(0, end, 22, 5); // da meia-noite até a saída
+  } else {
+    totalMinutes += calculateNightShiftMinutesBetween(start, end, 22, 5); // sem cruzar a meia-noite
   }
+
   // desconto de 8.5 minutos por hora noturna
   const hoursInNightShift = totalMinutes / 60;
   return hoursInNightShift * 8.5;
+}
+
+function calculateNightShiftMinutesBetween(start, end, nightStart, nightEnd) {
+  let totalMinutes = 0;
+
+  for (let m = Math.floor(start * 60); m < end * 60; m++) {
+    const hour = (m / 60) % 24;
+    if (hour >= nightStart || hour < nightEnd) {
+      totalMinutes += 1;
+    }
+  }
+
+  return totalMinutes;
 }
 
 function displayResult(suggestedExit, limitExit) {
@@ -95,20 +104,20 @@ function displayResult(suggestedExit, limitExit) {
     return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
   };
 
-  if (isNaN(suggestedExit) || isNaN(limitExit)) {
-    displayErrorMessage("Por favor, preencha todos os horários corretamente.");
-    return;
+  // Garantir que a hora sugerida não exceda 24 horas (evitar resultados como 29:49)
+  if (suggestedExit >= 24) {
+    suggestedExit -= 24; // Ajuste para garantir que a hora sugerida não ultrapasse 24 horas
+  }
+
+  // Ajustar para que o horário limite também não ultrapasse 24 horas
+  if (limitExit >= 24) {
+    limitExit -= 24;
   }
 
   document.getElementById('resultado').innerHTML = `
-    <span class="hora-sugerida">Saída sugerida: ${format(suggestedExit)}</span>
+  <span class="hora-sugerida">Saída sugerida: ${format(suggestedExit)}</span>
     <span class="hora-limite">Horário limite: ${format(limitExit)}</span>
   `;
-  document.getElementById('resultado').style.display = 'block';
-}
-
-function displayErrorMessage(message) {
-  document.getElementById('resultado').innerHTML = `<span class="erro">${message}</span>`;
   document.getElementById('resultado').style.display = 'block';
 }
 
