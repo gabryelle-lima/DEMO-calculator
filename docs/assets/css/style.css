@@ -307,100 +307,86 @@ nav ul li a:hover {
 
   h2 {
     font-size: 1.8rem;
-    margin-top: -30px;
+    margin-top: 10px;
     margin-bottom: 20px;
     padding: 5px;
   }
 
-  observacao-legal {
-    max-width: 80%; 
-    font-size: 9px; 
+  .observacao-legal {
+    max-width: 90%;
+    font-size: 9px;
     word-break: break-word;
     white-space: normal;
     margin-top: 10px;
-    }
-
-  campo input[type="time"] {
-      font-size: 1rem;
-      align-items: center;
-      position: relative;
-      justify-content: center;
   }
 
-  
+  .campo input[type="time"] {
+    font-size: 1rem;
+  }
+
+  .marcacoes {
+    display: flex;
+    flex-direction: column; /* coloca título e botões um abaixo do outro */
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .opcoes-jornada {
+    display: flex;
+    flex-direction: row; /* botões lado a lado */
+    gap: 15px;
+  }
+
   input {
     justify-content: center;
   }
-
 }
 
-
-
-    @media (max-width: 300px) {
-      main {
-        padding: 60px 10px 20px;
-      }
-    
-      h2 {
-        font-size: 1.8rem;
-        margin-top: -30px;
-        margin-bottom: 20px;
-        padding: 5px;
-      }
-    
-      observacao-legal {
-        max-width: 80%; 
-        font-size: 9px; 
-        word-break: break-word;
-        white-space: normal;
-        margin-top: 10px;
-        }
-    
-      campo input[type="time"] {
-          font-size: 1rem;
-          align-items: center;
-          position: relative;
-          justify-content: center;
-      }
-    
-      
-      input {
-        justify-content: center;
-      }
-
-    } 
-    
-    
-    @media (max-width: 400px) {
-      main {
-        padding: 60px 10px 20px;
-      }
-    
-      h2 {
-        font-size: 1.8rem;
-        margin-top: -30px;
-        margin-bottom: 20px;
-        padding: 5px;
-      }
-    
-      observacao-legal {
-        max-width: 80%; 
-        font-size: 9px; 
-        word-break: break-word;
-        white-space: normal;
-        margin-top: 10px;
-        }
-    
-      campo input[type="time"] {
-          font-size: 1rem;
-          align-items: center;
-          position: relative;
-          justify-content: center;
-      }
-
-      input {
-        justify-content: center;
-      }    
-
+@media (max-width: 400px) {
+  main {
+    padding: 50px 10px 20px;
   }
+
+  h2 {
+    font-size: 1.6rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+
+  .observacao-legal {
+    max-width: 90%;
+    font-size: 8px;
+    margin-top: 10px;
+  }
+
+  .campo input[type="time"] {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 300px) {
+  main {
+    padding: 40px 5px 20px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+
+  .observacao-legal {
+    max-width: 95%;
+    font-size: 7px;
+    margin-top: 8px;
+  }
+
+  .campo input[type="time"] {
+    font-size: 0.8rem;
+  }
+}
+
 
