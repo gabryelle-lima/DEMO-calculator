@@ -338,9 +338,6 @@ nav ul li a:hover {
     gap: 15px;
   }
 
-  input {
-    justify-content: center;
-  }
 }
 
 @media (max-width: 400px) {
