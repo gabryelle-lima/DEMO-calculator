@@ -345,6 +345,12 @@ nav ul li a:hover {
     margin-top: 10px;
   }
 
+  .opcoes-jornada label {
+    flex: 1 1 45%;
+    justify-content: center;
+  }
+  
+
 }
 
 @media (max-width: 400px) {
