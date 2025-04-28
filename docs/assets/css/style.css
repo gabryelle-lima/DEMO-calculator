@@ -345,11 +345,13 @@ nav ul li a:hover {
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 10px;
+    max-width: 100%;
   }
 
   .opcoes-jornada label {
     flex: 1 1 45%;
     justify-content: center;
+    max-width: 100%;
   }
   
 
