@@ -185,7 +185,7 @@ nav ul li a:hover {
 
 .campo {
   margin-bottom: 15px;
-  justify-content: center;
+  text-align: center;
 }
 
 .campo label {
