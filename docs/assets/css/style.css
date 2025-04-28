@@ -154,6 +154,7 @@ nav ul li a:hover {
   font-weight: bold;
   background-color: #fff;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .marcacoes {
@@ -184,6 +185,7 @@ nav ul li a:hover {
 
 .campo {
   margin-bottom: 15px;
+  justify-content: center;
 }
 
 .campo label {
