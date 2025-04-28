@@ -354,7 +354,7 @@ nav ul li a:hover {
     max-width: 100%;
   }
 
-  .campo {
+  .campo label{
     text-align: center;
   }
   
@@ -382,6 +382,11 @@ nav ul li a:hover {
   .campo input[type="time"] {
     font-size: 0.9rem;
   }
+
+  .campo label{
+    text-align: center;
+  }
+
 }
 
 @media (max-width: 300px) {
@@ -405,6 +410,11 @@ nav ul li a:hover {
   .campo input[type="time"] {
     font-size: 0.8rem;
   }
+
+  .campo label{
+    text-align: center;
+  }
+  
 }
 
 
