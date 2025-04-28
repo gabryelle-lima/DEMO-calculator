@@ -25,6 +25,30 @@ header {
   z-index: 1;
 }
 
+main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 0 20px;
+}
+
+h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #444;
+  width: 100%;
+  position: relative;
+  top: 50px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -40px;
+}
+
 nav {
   position: fixed;
   top: 0;
@@ -82,30 +106,6 @@ nav ul li a:hover {
   transition: background-color 0.3s, color 0.3s;
 }
 
-main {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 80px 0 20px;
-}
-
-h2 {
-  font-family: 'Nunito', sans-serif;
-  font-size: 2.2rem;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #444;
-  width: 100%;
-  position: relative;
-  top: 50px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: -40px;
-}
-
 #resultado {
   margin-top: 10px;
   padding: 15px;
@@ -159,8 +159,8 @@ h2 {
 .marcacoes {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 20px;
+  flex-wrap: wrap;
   width: 100%;
   max-width: 500px;
   margin-top: 20px;
@@ -184,7 +184,6 @@ h2 {
 
 .campo {
   margin-bottom: 15px;
-  width: 100%;
 }
 
 .campo label {
@@ -209,7 +208,6 @@ h2 {
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 .botoes button {
@@ -248,9 +246,6 @@ h2 {
   display: flex;
   gap: 20px;
   font-size: 1rem;
-  justify-content: center;
-  margin-top: 20px;
-  flex-wrap: wrap;
 }
 
 .opcoes-jornada label {
@@ -305,7 +300,6 @@ h2 {
   border-radius: 5px;
 }
 
-/* RESPONSIVO */
 @media (max-width: 600px) {
   main {
     padding: 60px 10px 20px;
@@ -313,65 +307,49 @@ h2 {
 
   h2 {
     font-size: 1.8rem;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
-    text-align: center;
     padding: 5px;
   }
 
   .observacao-legal {
     max-width: 90%;
     font-size: 9px;
-    margin-top: 20px;
-    text-align: center;
+    word-break: break-word;
+    white-space: normal;
+    margin-top: 10px;
   }
 
   .campo input[type="time"] {
     font-size: 1rem;
+    justify-content: center;
   }
 
   .marcacoes {
-    flex-direction: column;
+    display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     margin-top: 20px;
-    width: 100%;
   }
 
-  .opcoes-jornada {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    width: 100%;
-  }
-
-  .marcacao, .botoes button {
-    width: 100%;
-    max-width: 250px;
-  }
-
-  .botoes {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
 
 @media (max-width: 400px) {
   main {
-    padding: 40px 10px 20px;
+    padding: 50px 10px 20px;
   }
 
   h2 {
     font-size: 1.6rem;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 20px;
+    padding: 5px;
   }
 
   .observacao-legal {
-    max-width: 95%;
+    max-width: 90%;
     font-size: 8px;
-    margin-top: 15px;
+    margin-top: 10px;
   }
 
   .campo input[type="time"] {
@@ -381,22 +359,25 @@ h2 {
 
 @media (max-width: 300px) {
   main {
-    padding: 30px 5px 20px;
+    padding: 40px 5px 20px;
   }
 
   h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding: 5px;
   }
 
   .observacao-legal {
     max-width: 95%;
     font-size: 7px;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
   .campo input[type="time"] {
     font-size: 0.8rem;
   }
 }
+
+
