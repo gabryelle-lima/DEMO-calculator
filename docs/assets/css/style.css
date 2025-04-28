@@ -184,10 +184,6 @@ nav ul li a:hover {
 
 .campo {
   margin-bottom: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 }
 
 .campo label {
@@ -196,7 +192,6 @@ nav ul li a:hover {
   margin-bottom: 2px;
   color: #333;
   text-align: center;
-  width: 100%;
 }
 
 .campo input[type="time"] {
@@ -207,7 +202,6 @@ nav ul li a:hover {
   border-radius: 5px;
   background-color: #fff;
   color: #333;
-  text-align: center;
 }
 
 .botoes {
@@ -343,62 +337,70 @@ nav ul li a:hover {
 
 
     @media (max-width: 300px) {
-      .observacao-legal {
-        max-width: 90%;
-        font-size: 8px;
-        padding: 5px;
-        white-space: normal;
-        margin-top: 20px;
+      main {
+        padding: 60px 10px 20px;
       }
-
+    
       h2 {
         font-size: 1.8rem;
         margin-top: -30px;
         margin-bottom: 20px;
         padding: 5px;
       }
-
-      .campo input[type="time"] {
-        font-size: 1rem;
-        align-items: center;
-        position: relative;
-        justify-content: center;
-    }
-
     
-    .input {
-      justify-content: center;
-    }
+      observacao-legal {
+        max-width: 80%; 
+        font-size: 9px; 
+        word-break: break-word;
+        white-space: normal;
+        margin-top: 10px;
+        }
+    
+      campo input[type="time"] {
+          font-size: 1rem;
+          align-items: center;
+          position: relative;
+          justify-content: center;
+      }
+    
+      
+      input {
+        justify-content: center;
+      }
 
-  }
+    } 
+    
     
     @media (max-width: 400px) {
-
+      main {
+        padding: 60px 10px 20px;
+      }
+    
       h2 {
         font-size: 1.8rem;
         margin-top: -30px;
         margin-bottom: 20px;
         padding: 5px;
       }
-
-      .container {
-        padding: 20px;
+    
+      observacao-legal {
+        max-width: 80%; 
+        font-size: 9px; 
+        word-break: break-word;
+        white-space: normal;
+        margin-top: 10px;
+        }
+    
+      campo input[type="time"] {
+          font-size: 1rem;
+          align-items: center;
+          position: relative;
+          justify-content: center;
       }
 
-      .campo input[type="time"] {
-        font-size: 1rem;
-        align-items: center;
+      input {
         justify-content: center;
-        position: relative;
-      }
-
-      .botoes button {
-        font-size: 0.9rem;
-      }
-
-    .input {
-      justify-content: center;
-    }
+      }    
 
   }
 
