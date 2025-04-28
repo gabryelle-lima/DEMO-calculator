@@ -193,6 +193,7 @@ nav ul li a:hover {
   font-size: 0.75rem;
   margin-bottom: 2px;
   color: #333;
+  text-align: center;
 }
 
 .campo input[type="time"] {
