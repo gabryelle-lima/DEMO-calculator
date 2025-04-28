@@ -326,7 +326,6 @@ nav ul li a:hover {
 
   .marcacoes {
     display: flex;
-    flex-direction: column; /* coloca título e botões um abaixo do outro */
     align-items: center;
     gap: 10px;
     margin-top: 20px;
@@ -334,7 +333,6 @@ nav ul li a:hover {
 
   .opcoes-jornada {
     display: flex;
-    flex-direction: row; /* botões lado a lado */
     gap: 15px;
   }
 
