@@ -309,20 +309,20 @@ nav ul li a:hover {
 .erro {
   color: red;
   font-size: 1rem;
-  font-weight: bold;
   text-align: center;
-  padding: 10px;
+  margin-top: 15px;
+  padding: 5px 10px;
+  word-break: break-word;
+  max-width: 90%;
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;
   border-radius: 5px;
 }
 
 @media (max-width: 768px) {
-  .hamburger {
-    display: block;
-    position: absolute;
-    top: 10px;
-    left: 20px;
+  nav {
+    border: none;
+    box-shadow: none;
   }
 
   nav ul {
@@ -333,10 +333,9 @@ nav ul li a:hover {
     left: 0;
     width: 100%;
     background-color: #fff;
-    display: none; /* menu fechado por padrão */
+    display: none;
     padding: 10px 0;
-    border-top: 1px solid #e0e0e0;
-    z-index: 1000;
+    border: none;
   }
 
   nav ul li {
@@ -345,6 +344,17 @@ nav ul li a:hover {
 
   nav ul.show {
     display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
+
+  .logo-mobile-hide {
+    display: none;
   }
 }
 
@@ -358,6 +368,11 @@ nav ul li a:hover {
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 5px;
+  }
+
+  .erro {
+    font-size: 0.9rem;
+    margin-top: 10px;
   }
 
   .observacao-legal {
@@ -410,6 +425,11 @@ nav ul li a:hover {
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 5px;
+  }
+
+   .erro {
+    font-size: 0.8rem;
+    margin-top: 8px;
   }
 
   .observacao-legal {
