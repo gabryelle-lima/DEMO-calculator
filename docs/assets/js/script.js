@@ -137,17 +137,3 @@ function resetFields() {
   document.getElementById('resultado').style.display = 'none';
   toggleCampoExtra();
 }
-
-document.getElementById('menu-toggle').addEventListener('click', function () {
-  const navList = document.getElementById('nav-list');
-  navList.classList.toggle('show');
-});
-
-
-
-/*
-* Copyright (c) 2025 Gabryelle de Lourdes Machado Lima
-* Licenciado sob contrato proprietário.
-* Todos os direitos reservados.
-* Não é permitido redistribuir, modificar ou sublicenciar este código sem autorização.
-*/
