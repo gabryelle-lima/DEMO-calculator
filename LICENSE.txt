@@ -1,0 +1,28 @@
+                                LICENSE DE USO - CÓDIGO PROPRIETÁRIO
+                                
+Este software, denominado **"Calculadora de jornada"**, é licenciado sob contrato proprietário.
+
+**Direitos Autorais:**  
+(c) 2025 Gabryelle de Lourdes Machado Lima
+
+---
+
+### 1. **Licença de Uso:**
+A utilização do software está sujeita a um acordo específico de licenciamento, o qual deverá ser firmado entre as partes envolvidas. O licenciamento é concedido para uso exclusivo do licenciado, sendo vedada qualquer forma de distribuição não autorizada.
+
+### 2. **Proibições:**
+- **Redistribuição**: Não é permitido redistribuir o código ou software, no todo ou em parte, sem autorização por escrito do autor.
+- **Modificação**: Não é permitido modificar, descompilar, ou criar trabalhos derivados do código original.
+- **Venda e Sublicenciamento**: A venda, sublicenciamento, ou transferência do código para terceiros está estritamente proibida.
+
+### 3. **Isenção de Garantias:**
+Este software é fornecido "no estado em que se encontra", sem garantias expressas ou implícitas. O autor não se responsabiliza por quaisquer danos diretos, indiretos ou consequenciais que possam surgir no uso deste software.
+
+### 4. **Direitos Reservados:**
+Todos os direitos sobre o software são reservados ao autor. O uso do software só é permitido dentro dos termos do acordo de licenciamento.
+
+---
+
+**Contato:**  
+Gabryelle de Lourdes Machado Lima  
+Email: gabryelle-lima@outlook.com
