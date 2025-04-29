@@ -356,6 +356,15 @@ nav ul li a:hover {
   .logo-mobile-hide {
     display: none;
   }
+
+  .erro {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .observacao-legal {
+    font-size: 10px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -427,7 +436,7 @@ nav ul li a:hover {
     padding: 5px;
   }
 
-   .erro {
+  .erro {
     font-size: 0.8rem;
     margin-top: 8px;
   }
@@ -473,4 +482,3 @@ nav ul li a:hover {
     text-align: center;
   }
 }
-
