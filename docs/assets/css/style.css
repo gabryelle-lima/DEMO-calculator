@@ -126,7 +126,6 @@ nav ul li a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
   text-align: center;
-  display: none;
 }
 
 .hora-sugerida, .hora-limite {
@@ -343,6 +342,8 @@ nav ul li a:hover {
 
   nav ul.show {
     display: flex !important;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .hamburger {
@@ -436,6 +437,15 @@ nav ul li a:hover {
     text-align: center !important;
   }
 }
+
+#resultado {
+  display: none;
+}
+
+#resultado.resultado {
+  display: block;
+}
+
 
 @media (max-width: 400px) {
   main {

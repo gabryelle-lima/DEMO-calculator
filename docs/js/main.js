@@ -1,7 +1,16 @@
-// main.js
 import { calculateExitTime } from './calculadora.js';
-import { displayResult, resetFields, toggleCampoExtra } from './ui.js';
+import { displayResult, resetFields, toggleCampoExtra, mostrarErro, ocultarErro } from './ui.js';
 
+const toggle = document.getElementById('menu-toggle');
+const navList = document.getElementById('nav-list');
+
+toggle.addEventListener('click', () => {
+  navList.classList.toggle('show');
+});
+
+
+document.getElementById('quatro-marcacoes').addEventListener('change', toggleCampoExtra);
+document.getElementById('seis-marcacoes').addEventListener('change', toggleCampoExtra);
 
 document.getElementById('calcular').addEventListener('click', function() {
   const entrada = document.getElementById('entrada').value;
@@ -10,31 +19,21 @@ document.getElementById('calcular').addEventListener('click', function() {
   const segundaSaida = document.getElementById('segunda-saida').value;
   const segundaEntrada = document.getElementById('segunda-entrada').value;
 
-  if (!entrada || !saidaCafe || !entradaCafe) {
-    alert('Preencha todos os campos obrigatórios!');
+  const modo = document.querySelector('input[name="modo-jornada"]:checked').value;
+  const isQuatroMarcacoes = (modo === 'quatro');
+
+  if (!entrada || !saidaCafe || !entradaCafe || (!isQuatroMarcacoes && (!segundaSaida || !segundaEntrada))) {
+    mostrarErro("Preencha todos os horários obrigatórios.");
     return;
   }
 
-  const tipoJornada = document.querySelector('input[name="modo-jornada"]:checked').value;
-  const camposExtras = tipoJornada === 'seis' ? [segundaSaida, segundaEntrada] : [];
+  ocultarErro();
 
-  try {
-    const { saidaSugerida, horarioLimite } = calculateExitTime(
-      entrada, 
-      saidaCafe, 
-      entradaCafe, 
-      ...camposExtras
-    );
-    displayResult(saidaSugerida, horarioLimite);
-  } catch (error) {
-    console.error(error.message);
-    displayResult('Erro no cálculo', 'Erro no cálculo');
-  }
+  const resultado = calculateExitTime(entrada, saidaCafe, entradaCafe, segundaSaida, segundaEntrada);
+  displayResult(resultado.saidaSugerida, resultado.horarioLimite);
 });
 
 document.getElementById('resetar').addEventListener('click', resetFields);
 
-document.querySelectorAll('input[name="modo-jornada"]').forEach(radio => {
-  radio.addEventListener('change', toggleCampoExtra);
-});
-
+// Torna a função disponível globalmente para testes no console
+window.calculateExitTime = calculateExitTime;

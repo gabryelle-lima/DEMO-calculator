@@ -7,10 +7,9 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>Calculadora de jornada</title>
-    <!-- Link para o arquivo de estilo -->
+
     <link rel="stylesheet" href="assets/css/style.css">
     
-    <!-- Fonts Google -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lilita+One&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
@@ -27,11 +26,11 @@
                 <label>Escolha o tipo de jornada</label>
                 <div class="opcoes-jornada">
                     <label for="quatro-marcacoes">
-                        <input type="radio" id="quatro-marcacoes" checked name="modo-jornada" value="quatro" onchange="toggleCampoExtra()">
+                        <input type="radio" id="quatro-marcacoes" checked name="modo-jornada" value="quatro">
                         <span>Quatro marcações</span>
                     </label>
                     <label for="seis-marcacoes">
-                        <input type="radio" id="seis-marcacoes" name="modo-jornada" value="seis" onchange="toggleCampoExtra()">
+                        <input type="radio" id="seis-marcacoes" name="modo-jornada" value="seis">
                         <span>Seis marcações</span>
                     </label>
                 </div>
@@ -66,38 +65,36 @@
                     <button id="resetar">Resetar</button>
                 </div>
 
-                <div id="resultado"></div>
+                <div id="resultado" class="hiden"></div>
+                
+                <div id="mensagemErro" class="mensagem-erro"></div>
+
+
             </div>
 
         </div>
 
     </main>
 
-    <!-- Navegação -->
     <nav>
         <button id="menu-toggle" class="hamburger">&#9776;</button>
         <ul id="nav-list">
             <li>
                 <a href="https://webapp.confianca.com.br/consultaponto/ponto.aspx" target="_blank" rel="noopener noreferrer">Consulta Ponto</a>
             </li>
-            <li class="logo-mobile-hide">
-                <a href="index.html">
-                    <img src="assets/image/menu/confianca.png" alt="Logo Confiança" class="confi">
-                </a>
-            </li> 
+           
             <li>
                 <a href="https://portalfuncionario.confianca.com.br/" target="_blank" rel="noopener noreferrer">Portal funcionário</a>
             </li>
         </ul>
     </nav>
 
-    <!-- Observação legal -->
     <div class="observacao-legal">
-        Esta calculadora tem caráter informativo e auxilia no controle de jornada. Orientamos que jornadas superiores ao estabelecido em contrato sejam comunicadas e justificadas, evitando a ocorrência de horas extras não autorizadas.
+        Esta calculadora tem caráter informativo e auxilia no controle de jornada. Orientamos que jornadas superiores ao estabelecido em contrato sejam comunicadas e justificadas, evitando a ocorrência de horas extras não autorizadas. 
+        <br>¹O resultado considera uma margem de 2(dois)minutos para menos.
     </div>
 
-    <!-- Scripts -->
-    <script type="module" src="js/main.js" defer></script>
+    <script type="module" src="./js/main.js" defer></script>
 
 </body>
 </html>
