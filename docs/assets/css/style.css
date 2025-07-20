@@ -344,6 +344,17 @@ nav ul li a:hover {
     display: flex !important;
     flex-direction: column;
     gap: 10px;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    background-color: #fff !important;
+    z-index: 2000 !important;       /* acima de tudo */
+    padding-top: 60px !important;   /* afasta do topo */
+    overflow-y: auto !important;    /* scroll se muitos itens */
+  }
+
   }
 
   .hamburger {
