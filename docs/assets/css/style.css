@@ -324,16 +324,13 @@ nav ul li a:hover {
   }
 
   nav ul {
-    flex-direction: column !important;
-    gap: 0 !important;
+    display: none !important;
     position: absolute !important;
     top: 60px !important;
     left: 0 !important;
     width: 100% !important;
     background-color: #fff !important;
-    display: none !important;
-    padding: 10px 0 !important;
-    border: none !important;
+    z-index: 2000 !important;
   }
 
   nav ul li {
@@ -342,19 +339,7 @@ nav ul li a:hover {
 
   nav ul.show {
     display: flex !important;
-    flex-direction: column;
-    gap: 10px;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100vh !important;
-    background-color: #fff !important;
-    z-index: 2000 !important;       /* acima de tudo */
-    padding-top: 60px !important;   /* afasta do topo */
-    overflow-y: auto !important;    /* scroll se muitos itens */
-  }
-
+    flex-direction: column !important;
   }
 
   .hamburger {
@@ -362,6 +347,7 @@ nav ul li a:hover {
     position: absolute !important;
     top: 10px !important;
     left: 20px !important;
+    z-index: 2001 !important;
   }
 
   .logo-mobile-hide {
@@ -410,111 +396,6 @@ nav ul li a:hover {
     justify-content: center !important;
     max-width: 100% !important;
     text-align: center !important;
-  }
-
-  .campo label {
-    text-align: center !important;
-  }
-}
-
-@media (max-width: 600px) {
-  main {
-    padding: 60px 10px 20px !important;
-  }
-
-  h2 {
-    font-size: 1.8rem !important;
-    margin-top: 10px !important;
-    margin-bottom: 20px !important;
-    padding: 5px !important;
-  }
-
-  .erro {
-    font-size: 0.9rem !important;
-    margin-top: 10px !important;
-    text-align: center !important;
-  }
-
-  .observacao-legal {
-    font-size: 9px !important;
-    margin-top: 10px !important;
-  }
-
-  .campo input[type="time"] {
-    font-size: 1rem !important;
-  }
-
-  .campo label {
-    text-align: center !important;
-  }
-}
-
-#resultado {
-  display: none;
-}
-
-#resultado.resultado {
-  display: block;
-}
-
-
-@media (max-width: 400px) {
-  main {
-    padding: 50px 10px 20px !important;
-  }
-
-  h2 {
-    font-size: 1.6rem !important;
-    margin-top: 10px !important;
-    margin-bottom: 20px !important;
-    padding: 5px !important;
-  }
-
-  .erro {
-    font-size: 0.8rem !important;
-    margin-top: 8px !important;
-    text-align: center !important;
-  }
-
-  .observacao-legal {
-    font-size: 8px !important;
-    margin-top: 10px !important;
-  }
-
-  .campo input[type="time"] {
-    font-size: 0.9rem !important;
-  }
-
-  .campo label {
-    text-align: center !important;
-  }
-}
-
-@media (max-width: 300px) {
-  main {
-    padding: 40px 5px 20px !important;
-  }
-
-  h2 {
-    font-size: 1.5rem !important;
-    margin-top: 10px !important;
-    margin-bottom: 20px !important;
-    padding: 5px !important;
-  }
-
-  .erro {
-    font-size: 0.7rem !important;
-    margin-top: 8px !important;
-    text-align: center !important;
-  }
-
-  .observacao-legal {
-    font-size: 7px !important;
-    margin-top: 8px !important;
-  }
-
-  .campo input[type="time"] {
-    font-size: 0.8rem !important;
   }
 
   .campo label {
