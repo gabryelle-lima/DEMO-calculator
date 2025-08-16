@@ -2,7 +2,7 @@
 export function calculateExitTime(entry, breakOut, breakIn, breakOut2 = null, breakIn2 = null) {
   const FATOR_NOTURNO = 60 / 52.5;   // cada minuto noturno “vale” ≈1.142857 efetivos
   const META_TRABALHO = 440;         // 7h20 em minutos efetivos
-  const META_EXTRAS   = 120;         // +2h em minutos efetivos
+  const META_EXTRAS   = 110;         // +2h em minutos efetivos
 
   // Converte “HH:MM” → minutos desde meia‑noite
   function parseHM(s) {

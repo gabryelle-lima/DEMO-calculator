@@ -50,6 +50,10 @@ h2 {
   padding: 20px;
 }
 
+titulo-calculadora {
+  display: none;
+}
+
 nav {
   position: fixed;
   top: 0;
