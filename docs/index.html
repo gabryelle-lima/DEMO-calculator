@@ -1,103 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>Calculadora de jornada</title>
-
-    <link rel="stylesheet" href="assets/css/style.css">
-    
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lilita+One&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102c32">
+  <meta name="description" content="Planeje sua saída com intervalos, hora noturna reduzida e margem de segurança ajustável.">
+  <title>Calculadora de jornada</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header>
-        <h2 id="titulo-calculadora" style="display: none;">Calculadora de jornada</h2>
-    </header>
-
-    <main>
-        <div class="container">
-
-            <div class="campo">
-                <label>Escolha o tipo de jornada</label>
-                <div class="opcoes-jornada">
-                    <label for="quatro-marcacoes">
-                        <input type="radio" id="quatro-marcacoes" checked name="modo-jornada" value="quatro">
-                        <span>Quatro marcações</span>
-                    </label>
-                    <label for="seis-marcacoes">
-                        <input type="radio" id="seis-marcacoes" name="modo-jornada" value="seis">
-                        <span>Seis marcações</span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="calculadora">
-                <div class="campo">
-                    <label for="entrada">Hora da entrada</label>
-                    <input type="time" id="entrada" name="entrada">
-                </div>
-
-                <div class="campo"> 
-                    <label for="saida-cafe">Primeira saída</label>
-                    <input type="time" id="saida-cafe" name="saida-cafe">
-                </div>
-
-                <div class="campo"> 
-                    <label for="entrada-cafe">Segunda entrada</label>
-                    <input type="time" id="entrada-cafe" name="entrada-cafe">
-                </div>
-                
-                <div class="campo extra" id="campoExtra" style="display: none;"> 
-                    <label for="segunda-saida">Segunda saída</label>
-                    <input type="time" id="segunda-saida" name="segunda-saida">
-
-                    <label for="segunda-entrada">Segunda entrada</label>
-                    <input type="time" id="segunda-entrada" name="segunda-entrada">
-                </div>
-
-                <div class="botoes">
-                    <button id="calcular">Calcular</button>
-                    <button id="resetar">Resetar</button>
-                </div>
-
-                <div id="resultado"></div>
-                
-                <div id="mensagemErro" class="mensagem-erro"></div>
-
-
-            </div>
-
-        </div>
-
-    </main>
-
-    <nav>
-        <button id="menu-toggle" class="hamburger">&#9776;</button>
-        <ul id="nav-list">
-            <li>
-                <a href="https://webapp.confianca.com.br/consultaponto/ponto.aspx" target="_blank" rel="noopener noreferrer">Consulta Ponto</a>
-            </li>
-           
-            <li>
-                <a href="https://portalfuncionario.confianca.com.br/" target="_blank" rel="noopener noreferrer">Portal funcionário</a>
-            </li>
-        </ul>
+  <header class="topbar">
+    <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">◷</span> Jornada<span class="brand-dot">.</span></a>
+    <nav aria-label="Links úteis">
+      <a href="https://webapp.confianca.com.br/consultaponto/ponto.aspx" target="_blank" rel="noopener noreferrer">Consulta de ponto ↗</a>
+      <a href="https://portalfuncionario.confianca.com.br/" target="_blank" rel="noopener noreferrer">Portal do funcionário ↗</a>
     </nav>
-
-    <div class="observacao-legal">
-        Esta calculadora tem caráter informativo e auxilia no controle de jornada. Orientamos que jornadas superiores ao estabelecido em contrato sejam comunicadas e justificadas, evitando a ocorrência de horas extras não autorizadas.
-
-        Fique atento ao novo limite de hora extra: 1h50m.
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">SEU TEMPO, BEM CALCULADO</p>
+      <h1>Saiba a hora de<br><span>encerrar o dia.</span></h1>
+      <p>Do primeiro registro à última saída.<br>Calcule sua jornada, inclusive quando ela atravessa a meia-noite.</p>
+    </section>
+    <div class="workspace">
+      <section class="card form-card" aria-labelledby="form-title">
+        <div class="card-heading"><span class="step">01</span><div><h2 id="form-title">Suas marcações</h2><p>Informe os horários na ordem em que aconteceram.</p></div></div>
+        <form id="jornada-form">
+          <fieldset class="mode"><legend>Tipo de jornada</legend>
+            <label><input type="radio" id="quatro-marcacoes" name="modo-jornada" value="quatro" checked><span>4 marcações <small>Um intervalo</small></span></label>
+            <label><input type="radio" id="seis-marcacoes" name="modo-jornada" value="seis"><span>6 marcações <small>Dois intervalos</small></span></label>
+          </fieldset>
+          <div class="time-row"><span class="marker">1</span><label for="entrada">Entrada<small>Início do trabalho</small></label><input type="time" id="entrada" name="entrada" required aria-describedby="overnight-hint"></div>
+          <div class="time-row"><span class="marker">2</span><label for="saida-cafe">Saída para intervalo<small>Primeira pausa</small></label><input type="time" id="saida-cafe" name="saida-cafe" required></div>
+          <div class="time-row"><span class="marker">3</span><label for="entrada-cafe">Retorno do intervalo<small>Volta ao trabalho</small></label><input type="time" id="entrada-cafe" name="entrada-cafe" required></div>
+          <fieldset id="campoExtra" hidden disabled><legend class="sr-only">Segundo intervalo</legend>
+            <div class="time-row"><span class="marker">4</span><label for="segunda-saida">Saída para intervalo<small>Segunda pausa</small></label><input type="time" id="segunda-saida" name="segunda-saida" required></div>
+            <div class="time-row"><span class="marker">5</span><label for="segunda-entrada">Retorno do intervalo<small>Volta ao trabalho</small></label><input type="time" id="segunda-entrada" name="segunda-entrada" required></div>
+          </fieldset>
+          <p class="hint" id="overnight-hint">↳ Um horário menor que o anterior será considerado no dia seguinte.</p>
+          <details class="settings"><summary>Ajustar regras do cálculo <span aria-hidden="true">＋</span></summary>
+            <div class="settings-grid">
+              <label for="jornada">Jornada (minutos)<input type="number" id="jornada" min="1" max="960" value="440" required><small>440 min = 7h20</small></label>
+              <label for="extras">Extras (minutos)<input type="number" id="extras" min="0" max="360" value="110" required><small>110 min = 1h50</small></label>
+              <label for="margem">Margem (minutos)<input type="number" id="margem" min="0" max="30" value="2" required><small>Antecipação da saída</small></label>
+            </div>
+            <label class="check"><input type="checkbox" id="noturno" checked> Aplicar hora noturna reduzida entre 22h e 05h</label>
+            <p class="hint">Cada 52min30s trabalhados nessa faixa contam como 60min. Intervalos não contam. Após 05h, o cálculo volta à hora comum.</p>
+          </details>
+          <div id="mensagemErro" role="alert" hidden></div>
+          <div class="actions"><button type="submit" id="calcular">Calcular saída <span aria-hidden="true">→</span></button><button type="reset" id="resetar">Limpar</button></div>
+        </form>
+      </section>
+      <aside class="right-column">
+        <section class="card result-card" aria-labelledby="result-title">
+          <div class="card-heading"><span class="step">02</span><div><h2 id="result-title">Seu horário de saída</h2><p>Planeje o restante da sua jornada.</p></div></div>
+          <div id="empty-result"><div class="clock-art" aria-hidden="true">◷</div><h3>Tudo no seu tempo.</h3><p>Preencha suas marcações e veja aqui<br>a saída sugerida e o limite com extras.</p></div>
+          <div id="resultado" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+        </section>
+        <section class="safety-note"><span aria-hidden="true">↙</span><div><h3>Uma margem para sair tranquilo</h3><p id="margin-note">Saídas arredondadas para baixo, com 2 minutos de antecedência. A margem pode deixar saldo negativo; confira seu ponto.</p></div></section>
+        <section class="rules-note"><h3>Como a conta funciona</h3><p>Trabalho diurno + trabalho noturno convertido.<br>As pausas ficam fora da soma.</p><div><span id="rule-jornada">7h20 de jornada</span><span id="rule-extras">Até 1h50 de extras</span></div></section>
+      </aside>
     </div>
-
-   <script type="module" src="./js/main.js" defer></script>
-
-    
-
+    <footer>Calculadora informativa. Confira as regras da sua escala e os registros oficiais de ponto. Os parâmetros são ajustáveis e não substituem a conferência com o RH.</footer>
+  </main>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
