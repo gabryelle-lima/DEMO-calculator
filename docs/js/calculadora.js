@@ -1,71 +1,73 @@
-// js/calculadora.js — versão produção com FLOOR (intervalos NUNCA contam; noturno = 60/52,5; advertência se passar do minuto)
-export function calculateExitTime(entry, breakOut, breakIn, breakOut2 = null, breakIn2 = null) {
-  const FATOR_NOTURNO = 60 / 52.5;   // cada minuto noturno “vale” ≈1.142857 efetivos
-  const META_TRABALHO = 440;         // 7h20 em minutos efetivos
-  const META_EXTRAS   = 110;         // +2h em minutos efetivos
-
-  // Converte “HH:MM” → minutos desde meia‑noite
-  function parseHM(s) {
-    if (!s) return 0;
-    const [h,m] = s.split(':').map(x => parseInt(x, 10));
-    return (isNaN(h)||isNaN(m)) ? 0 : h*60 + m;
+// Um minuto diurno vale 7 unidades; um noturno vale 8 (60/52,5 = 8/7).
+export const DEFAULTS = Object.freeze({ jornada: 440, extras: 110, margem: 2, noturno: true });
+function parseTime(value) {
+  if (typeof value !== 'string' || !/^([01]\d|2[0-3]):[0-5]\d$/.test(value)) throw new Error('Preencha os horários no formato HH:MM.');
+  const [h, m] = value.split(':').map(Number);
+  return h * 60 + m;
+}
+export function formatTime(absolute) {
+  const minute = ((absolute % 1440) + 1440) % 1440;
+  return `${String(Math.floor(minute / 60)).padStart(2, '0')}:${String(minute % 60).padStart(2, '0')}`;
+}
+export function calculateExitTime(entry, breakOut, breakIn, breakOut2 = null, breakIn2 = null, options = {}) {
+  const config = { ...DEFAULTS, ...options };
+  for (const [key, min, max] of [['jornada', 1, 960], ['extras', 0, 360], ['margem', 0, 30]]) {
+    if (!Number.isInteger(config[key]) || config[key] < min || config[key] > max) throw new Error(`Configuração inválida: ${key}.`);
   }
-
-  // Formata minutos absolutos → “HH:MM”
-  function fmt(min) {
-    const mTot = ((min % 1440) + 1440) % 1440;
-    const hh = Math.floor(mTot/60), mm = mTot%60;
-    return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
-  }
-
-  // Valor efetivo de 1 minuto real no instante t
-  function valorMinuto(t) {
-    const mod = t % 1440;
-    return (mod >= 1320 || mod < 300) ? FATOR_NOTURNO : 1;
-  }
-
-  // Soma efetiva em [start, end)
-  function somaEfetiva(start, end) {
-    let total = 0;
-    for (let t = start; t < end; t++) total += valorMinuto(t);
-    return total;
-  }
-
-  // Avança de “ini” minuto a minuto, parando **antes** de ultrapassar “alvoEff” (FLOOR)
-  function avancarAte(ini, alvoEff) {
-    let acc = 0, t = ini;
-    while (acc + valorMinuto(t) <= alvoEff) {
-      acc += valorMinuto(t);
-      t++;
+  const secondOut = breakOut2 !== null && breakOut2 !== '';
+  const secondIn = breakIn2 !== null && breakIn2 !== '';
+  if (secondOut !== secondIn) throw new Error('Preencha a saída e o retorno do segundo intervalo.');
+  const values = [entry, breakOut, breakIn, ...(secondOut ? [breakOut2, breakIn2] : [])];
+  const times = [];
+  for (const value of values) {
+    let time = parseTime(value);
+    if (times.length) {
+      const previous = times.at(-1);
+      time += Math.floor(previous / 1440) * 1440;
+      if (time < previous) time += 1440;
+      if (time === previous) throw new Error('Marcações consecutivas precisam ter horários diferentes.');
     }
-    return t; // primeiro minuto não contado (colaborador deve sair até t)
+    times.push(time);
   }
-
-  // — parse e normalização de cruzamento de meia‑noite —
-  let t0 = parseHM(entry);
-  let t1 = parseHM(breakOut);    if (t1 < t0) t1 += 1440;
-  let t2 = parseHM(breakIn);     if (t2 < t1) t2 += 1440;
-  let t3 = breakOut2 ? parseHM(breakOut2) : null;
-      if (t3 !== null && t3 < t2) t3 += 1440;
-  let t4 = breakIn2  ? parseHM(breakIn2)  : null;
-      if (t4 !== null && t4 < (t3 !== null ? t3 : t2)) t4 += 1440;
-
-  // — trabalho antes e (se houver) entre intervalos (intervalos NUNCA contam) —
-  const e1 = somaEfetiva(t0, t1);
-  let e2 = 0, inicio = t2;
-  if (t3 !== null) {
-    e2 = somaEfetiva(t2, t3);
-    inicio = (t4 !== null ? t4 : t3);
+  if (times.at(-1) - times[0] >= 1440) throw new Error('Confira a ordem: as marcações devem pertencer a uma jornada menor que 24 horas.');
+  const weight = t => config.noturno && (t % 1440 >= 1320 || t % 1440 < 300) ? 8 : 7;
+  function worked(start, end) {
+    let units = 0, night = 0;
+    for (let t = start; t < end; t++) { units += weight(t); if (weight(t) === 8) night++; }
+    return { units, night };
   }
-
-  // — calcula saída e limite (sempre FLOOR) —
-  const faltante = Math.max(0, META_TRABALHO - (e1 + e2));
-  const saidaAbs = avancarAte(inicio, faltante);
-  const limiteAbs = avancarAte(saidaAbs, META_EXTRAS);
-
+  const resume = times.at(-1);
+  let recorded = 0, recordedNight = 0, breaks = 0;
+  for (let i = 0; i < times.length - 1; i += 2) {
+    const segment = worked(times[i], times[i + 1]);
+    recorded += segment.units;
+    recordedNight += segment.night;
+    breaks += times[i + 2] - times[i + 1];
+  }
+  // Alvos independentes: as extras não partem de uma saída já arredondada.
+  function departure(target) {
+    let t = resume, units = recorded;
+    while (units + weight(t) <= target * 7) {
+      if (t - times[0] >= 1440) throw new Error('O resultado ultrapassa 24 horas. Revise a jornada e os horários.');
+      units += weight(t++);
+    }
+    return t;
+  }
+  const nominal = departure(config.jornada);
+  const cap = departure(config.jornada + config.extras);
+  const exit = Math.max(resume, nominal - config.margem);
+  const limit = Math.max(resume, cap - config.margem);
+  const finalSegment = worked(resume, exit);
   return {
-    saidaSugerida: fmt(saidaAbs),
-    horarioLimite: fmt(limiteAbs),
-    minutosSaida: Math.round(e1 + e2 + somaEfetiva(inicio, saidaAbs))
+    saidaSugerida: formatTime(exit), horarioLimite: formatTime(limit),
+    saidaSemMargem: formatTime(nominal), limiteSemMargem: formatTime(cap),
+    saidaAbs: exit, limiteAbs: limit, entradaAbs: times[0], retornoAbs: resume,
+    diaSaida: Math.floor(exit / 1440), diaLimite: Math.floor(limit / 1440),
+    minutosSaida: (recorded + finalSegment.units) / 7,
+    minutosRegistrados: recorded / 7, minutosNoturnos: recordedNight + finalSegment.night,
+    minutosIntervalo: breaks, margem: config.margem,
+    jornadaJaCumprida: recorded >= config.jornada * 7,
+    limiteJaUltrapassado: recorded > (config.jornada + config.extras) * 7,
+    margemLimiteCompleta: cap - resume >= config.margem
   };
 }

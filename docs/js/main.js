@@ -1,63 +1,35 @@
-// js/main.js — Código completo com verificação de campos e menu móvel
 import { calculateExitTime } from './calculadora.js';
-import { displayResult, resetFields, toggleCampoExtra, mostrarErro, ocultarErro } from './ui.js';
-
-// Toggle do menu em dispositivos móveis
-const menuToggle = document.getElementById('menu-toggle');
-const navList    = document.getElementById('nav-list');
-if (menuToggle && navList) {
-  menuToggle.addEventListener('click', () => {
-    navList.classList.toggle('show');
-  });
+import { displayResult, hideResult, toggleCampoExtra, mostrarErro, ocultarErro, duration } from './ui.js';
+const form = document.getElementById('jornada-form');
+const value = id => document.getElementById(id).value;
+function getConfig() {
+  return { jornada: Number(value('jornada')), extras: Number(value('extras')), margem: Number(value('margem')), noturno: document.getElementById('noturno').checked };
 }
-
-// Alterna campos extras para 4 ou 6 marcações
-const quatroMarc = document.getElementById('quatro-marcacoes');
-const seisMarc   = document.getElementById('seis-marcacoes');
-if (quatroMarc && seisMarc) {
-  quatroMarc.addEventListener('change', toggleCampoExtra);
-  seisMarc.addEventListener('change', toggleCampoExtra);
+function updateRules() {
+  const config = getConfig();
+  document.getElementById('rule-jornada').textContent = `${duration(config.jornada)} de jornada`;
+  document.getElementById('rule-extras').textContent = `Até ${duration(config.extras)} de extras`;
+  document.getElementById('margin-note').textContent = `Saídas arredondadas para baixo, com ${config.margem} minutos de antecedência. A margem pode deixar saldo negativo; confira seu ponto.`;
 }
-
-// Botão Calcular
-const btnCalcular = document.getElementById('calcular');
-if (btnCalcular) {
-  btnCalcular.addEventListener('click', () => {
-    const entrada        = document.getElementById('entrada').value;
-    const saidaCafe      = document.getElementById('saida-cafe').value;
-    const entradaCafe    = document.getElementById('entrada-cafe').value;
-    const segundaSaida   = document.getElementById('segunda-saida').value;
-    const segundaEntrada = document.getElementById('segunda-entrada').value;
-    const is4            = quatroMarc.checked;
-
-    // Validação de campos obrigatórios
-    if (!entrada || !saidaCafe || !entradaCafe || (!is4 && (!segundaSaida || !segundaEntrada))) {
-      mostrarErro("Preencha todos os horários obrigatórios.");
-      return;
-    }
-    ocultarErro();
-
-    // Cálculo e exibição do resultado
-    const resultado = calculateExitTime(
-      entrada,
-      saidaCafe,
-      entradaCafe,
-      is4 ? null : segundaSaida,
-      is4 ? null : segundaEntrada
-    );
-    displayResult(
-      resultado.saidaSugerida,
-      resultado.horarioLimite,
-      resultado.minutosSaida
-    );
-  });
-}
-
-// Botão Resetar
-const btnReset = document.getElementById('resetar');
-if (btnReset) {
-  btnReset.addEventListener('click', resetFields);
-}
-
-// Disponibiliza função no console para testes manuais
-window.calculateExitTime = calculateExitTime;
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  ocultarErro();
+  try {
+    const six = document.getElementById('seis-marcacoes').checked;
+    const config = getConfig();
+    const result = calculateExitTime(value('entrada'), value('saida-cafe'), value('entrada-cafe'), six ? value('segunda-saida') : null, six ? value('segunda-entrada') : null, config);
+    displayResult(result, config);
+  } catch (error) {
+    hideResult();
+    mostrarErro(error.message);
+  }
+});
+form.addEventListener('input', () => { hideResult(); ocultarErro(); updateRules(); });
+form.addEventListener('change', toggleCampoExtra);
+// O evento reset acontece antes de o navegador restaurar os valores iniciais.
+form.addEventListener('reset', () => queueMicrotask(() => {
+  hideResult(); ocultarErro(); toggleCampoExtra(); updateRules();
+}));
+form.addEventListener('invalid', hideResult, true);
+toggleCampoExtra();
+updateRules();
