@@ -1,5 +1,5 @@
 // Um minuto diurno vale 7 unidades; um noturno vale 8 (60/52,5 = 8/7).
-export const DEFAULTS = Object.freeze({ jornada: 440, extras: 110, margem: 2, noturno: true });
+export const DEFAULTS = Object.freeze({ jornada: 440, extras: 120, margem: 2, noturno: true });
 function parseTime(value) {
   if (typeof value !== 'string' || !/^([01]\d|2[0-3]):[0-5]\d$/.test(value)) throw new Error('Preencha os horários no formato HH:MM.');
   const [h, m] = value.split(':').map(Number);
