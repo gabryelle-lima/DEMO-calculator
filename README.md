@@ -6,7 +6,7 @@ Site estático em `docs/`, compatível com GitHub Pages. Sem dependências de pr
 
 Informe a entrada e os intervalos na ordem real. Um horário menor que o anterior é interpretado como o dia seguinte. Selecione quatro ou seis marcações. A última saída é calculada.
 
-Em **Regras do cálculo**:
+Em **Configurações**, ao lado de **Consulta de ponto**, ficam as regras do cálculo:
 
 - Jornada: 440 minutos (7h20), padrão do projeto atual.
 - Extras: 120 minutos (2h00).

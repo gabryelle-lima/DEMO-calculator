@@ -13,6 +13,7 @@
     <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">◷</span> Jornada<span class="brand-dot">.</span></a>
     <nav aria-label="Links úteis">
       <a href="https://webapp.confianca.com.br/consultaponto/ponto.aspx" target="_blank" rel="noopener noreferrer">Consulta de ponto ↗</a>
+      <button type="button" id="abrir-configuracoes" aria-controls="configuracoes" aria-expanded="false">Configurações</button>
     </nav>
   </header>
   <main>
@@ -21,7 +22,17 @@
       <h1>Calcule sua <span>hora de saída.</span></h1>
       <p>Jornada diurna ou noturna, com intervalos e 2 minutos de margem.</p>
     </section>
-    <div class="workspace">
+          <section id="configuracoes" class="card settings-panel" hidden aria-labelledby="settings-title"><h2 id="settings-title">Regras do cálculo</h2><p class="hint">Ajuste os parâmetros e volte à calculadora.</p>
+            <div class="settings-grid">
+              <label for="jornada">Jornada (minutos)<input form="jornada-form" type="number" id="jornada" min="1" max="960" value="440" required><small>440 min = 7h20</small></label>
+              <label for="extras">Extras (minutos)<input form="jornada-form" type="number" id="extras" min="0" max="360" value="120" required><small>120 min = 2h00</small></label>
+              <label for="margem">Margem (minutos)<input form="jornada-form" type="number" id="margem" min="0" max="30" value="2" required><small>Antecipação da saída</small></label>
+            </div>
+            <label class="check"><input form="jornada-form" type="checkbox" id="noturno" checked> Aplicar hora noturna reduzida entre 22h e 05h</label>
+            <p class="hint">Cada 52min30s trabalhados nessa faixa contam como 60min. Intervalos não contam. Após 05h, o cálculo volta à hora comum.</p>
+            <button type="button" id="voltar-calculadora">Voltar à calculadora</button>
+          </section>
+    <div class="workspace" id="calculadora-panel">
       <section class="card form-card" aria-labelledby="form-title">
         <div class="card-heading"><span class="step">01</span><div><h2 id="form-title">Suas marcações</h2><p>Informe os horários na ordem em que aconteceram.</p></div></div>
         <form id="jornada-form">
@@ -37,15 +48,6 @@
             <div class="time-row"><span class="marker">5</span><label for="segunda-entrada">Retorno do intervalo<small>Volta ao trabalho</small></label><input type="time" id="segunda-entrada" name="segunda-entrada" required></div>
           </fieldset>
           <p class="hint" id="overnight-hint">↳ Um horário menor que o anterior será considerado no dia seguinte.</p>
-          <section class="settings" aria-labelledby="settings-title"><h3 id="settings-title">Regras do cálculo</h3>
-            <div class="settings-grid">
-              <label for="jornada">Jornada (minutos)<input type="number" id="jornada" min="1" max="960" value="440" required><small>440 min = 7h20</small></label>
-              <label for="extras">Extras (minutos)<input type="number" id="extras" min="0" max="360" value="120" required><small>120 min = 2h00</small></label>
-              <label for="margem">Margem (minutos)<input type="number" id="margem" min="0" max="30" value="2" required><small>Antecipação da saída</small></label>
-            </div>
-            <label class="check"><input type="checkbox" id="noturno" checked> Aplicar hora noturna reduzida entre 22h e 05h</label>
-            <p class="hint">Cada 52min30s trabalhados nessa faixa contam como 60min. Intervalos não contam. Após 05h, o cálculo volta à hora comum.</p>
-          </section>
           <div id="mensagemErro" role="alert" hidden></div>
           <div class="actions"><button type="submit" id="calcular">Calcular saída <span aria-hidden="true">→</span></button><button type="reset" id="resetar">Limpar</button></div>
         </form>

@@ -586,3 +586,13 @@ footer { margin-top: 18px; padding: 12px 0; }
   h1 { font-size: 30px; }
   .workspace { gap: 14px; }
 }
+
+/* Acesso às regras na navegação, sem sair da hospedagem. */
+nav button { border: 0; background: transparent; color: #526b6d; font-size: 13px; font-weight: 400; padding: 0; }
+nav button:hover { text-decoration: underline; }
+nav button[aria-expanded="true"] { color: #146554; font-weight: 600; }
+.settings-panel { max-width: 640px; margin: 0 auto; }
+.settings-panel .settings-grid { padding-top: 16px; }
+.settings-panel small { color: var(--muted); font-size: 10px; }
+#voltar-calculadora { margin-top: 18px; background: #176b55; color: white; border: 0; }
+@media (max-width: 760px) { nav button { font-size: 10px; } }
