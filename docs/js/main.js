@@ -4,16 +4,20 @@ const form = document.getElementById('jornada-form');
 const settingsPanel = document.getElementById('configuracoes');
 const calculatorPanel = document.getElementById('calculadora-panel');
 const settingsButton = document.getElementById('abrir-configuracoes');
-function showSettings(open) {
-  settingsPanel.hidden = !open;
-  calculatorPanel.hidden = open;
-  settingsButton.setAttribute('aria-expanded', String(open));
+const manualPanel = document.getElementById('manual');
+const manualButton = document.getElementById('abrir-manual');
+function showPanel(panel) {
+  settingsPanel.hidden = panel !== 'settings';
+  manualPanel.hidden = panel !== 'manual';
+  calculatorPanel.hidden = panel !== 'calculator';
+  settingsButton.setAttribute('aria-expanded', String(panel === 'settings'));
+  manualButton.setAttribute('aria-expanded', String(panel === 'manual'));
 }
-settingsButton.addEventListener('click', () => showSettings(settingsPanel.hidden));
-document.getElementById('voltar-calculadora').addEventListener('click', () => {
-  showSettings(false);
-  settingsButton.focus();
-});
+settingsButton.addEventListener('click', () => showPanel(settingsPanel.hidden ? 'settings' : 'calculator'));
+manualButton.addEventListener('click', () => showPanel(manualPanel.hidden ? 'manual' : 'calculator'));
+for (const [id, trigger] of [['voltar-calculadora', settingsButton], ['voltar-manual', manualButton]]) {
+  document.getElementById(id).addEventListener('click', () => { showPanel('calculator'); trigger.focus(); });
+}
 const value = id => document.getElementById(id).value;
 function getConfig() {
   return { jornada: Number(value('jornada')), extras: Number(value('extras')), margem: Number(value('margem')), noturno: document.getElementById('noturno').checked };
@@ -45,7 +49,7 @@ form.addEventListener('reset', () => queueMicrotask(() => {
 }));
 document.querySelector('main').addEventListener('invalid', event => {
   hideResult();
-  showSettings(settingsPanel.contains(event.target));
+  showPanel(settingsPanel.contains(event.target) ? 'settings' : 'calculator');
 }, true);
 toggleCampoExtra();
 updateRules();

@@ -14,13 +14,12 @@
     <nav aria-label="Links úteis">
       <a href="https://webapp.confianca.com.br/consultaponto/ponto.aspx" target="_blank" rel="noopener noreferrer">Consulta de ponto ↗</a>
       <button type="button" id="abrir-configuracoes" aria-controls="configuracoes" aria-expanded="false">Configurações</button>
+      <button type="button" id="abrir-manual" aria-controls="manual" aria-expanded="false">Manual</button>
     </nav>
   </header>
   <main>
     <section class="intro">
-      <p class="eyebrow">SEU TEMPO, BEM CALCULADO</p>
       <h1>Calcule sua <span>hora de saída.</span></h1>
-      <p>Jornada diurna ou noturna, com intervalos e 2 minutos de margem.</p>
     </section>
           <section id="configuracoes" class="card settings-panel" hidden aria-labelledby="settings-title"><h2 id="settings-title">Regras do cálculo</h2><p class="hint">Ajuste os parâmetros e volte à calculadora.</p>
             <div class="settings-grid">
@@ -34,35 +33,48 @@
           </section>
     <div class="workspace" id="calculadora-panel">
       <section class="card form-card" aria-labelledby="form-title">
-        <div class="card-heading"><span class="step">01</span><div><h2 id="form-title">Suas marcações</h2><p>Informe os horários na ordem em que aconteceram.</p></div></div>
+        <div class="card-heading"><span class="step">01</span><div><h2 id="form-title">Suas marcações</h2></div></div>
         <form id="jornada-form">
           <fieldset class="mode"><legend>Tipo de jornada</legend>
             <label><input type="radio" id="quatro-marcacoes" name="modo-jornada" value="quatro" checked><span>4 marcações <small>Um intervalo</small></span></label>
             <label><input type="radio" id="seis-marcacoes" name="modo-jornada" value="seis"><span>6 marcações <small>Dois intervalos</small></span></label>
           </fieldset>
-          <div class="time-row"><span class="marker">1</span><label for="entrada">Entrada<small>Início do trabalho</small></label><input type="time" id="entrada" name="entrada" required aria-describedby="overnight-hint"></div>
+          <div class="time-row"><span class="marker">1</span><label for="entrada">Entrada<small>Início do trabalho</small></label><input type="time" id="entrada" name="entrada" required></div>
           <div class="time-row"><span class="marker">2</span><label for="saida-cafe">Saída para intervalo<small>Primeira pausa</small></label><input type="time" id="saida-cafe" name="saida-cafe" required></div>
           <div class="time-row"><span class="marker">3</span><label for="entrada-cafe">Retorno do intervalo<small>Volta ao trabalho</small></label><input type="time" id="entrada-cafe" name="entrada-cafe" required></div>
           <fieldset id="campoExtra" hidden disabled><legend class="sr-only">Segundo intervalo</legend>
             <div class="time-row"><span class="marker">4</span><label for="segunda-saida">Saída para intervalo<small>Segunda pausa</small></label><input type="time" id="segunda-saida" name="segunda-saida" required></div>
             <div class="time-row"><span class="marker">5</span><label for="segunda-entrada">Retorno do intervalo<small>Volta ao trabalho</small></label><input type="time" id="segunda-entrada" name="segunda-entrada" required></div>
           </fieldset>
-          <p class="hint" id="overnight-hint">↳ Um horário menor que o anterior será considerado no dia seguinte.</p>
           <div id="mensagemErro" role="alert" hidden></div>
           <div class="actions"><button type="submit" id="calcular">Calcular saída <span aria-hidden="true">→</span></button><button type="reset" id="resetar">Limpar</button></div>
         </form>
       </section>
       <aside class="right-column">
         <section class="card result-card" aria-labelledby="result-title">
-          <div class="card-heading"><span class="step">02</span><div><h2 id="result-title">Seu horário de saída</h2><p>Planeje o restante da sua jornada.</p></div></div>
-          <div id="empty-result"><div class="clock-art" aria-hidden="true">◷</div><h3>Tudo no seu tempo.</h3><p>Preencha suas marcações e veja aqui<br>a saída sugerida e o limite com extras.</p></div>
+          <div class="card-heading"><span class="step">02</span><div><h2 id="result-title">Seu horário de saída</h2></div></div>
+          <div id="empty-result"><div class="clock-art" aria-hidden="true">◷</div><h3>Tudo no seu tempo.</h3><p>Preencha os horários e clique em Calcular.</p></div>
           <div id="resultado" role="status" aria-live="polite" aria-atomic="true" hidden></div>
         </section>
-        <section class="safety-note"><span aria-hidden="true">↙</span><div><h3>Uma margem para sair tranquilo</h3><p id="margin-note">Saídas arredondadas para baixo, com 2 minutos de antecedência. A margem pode deixar saldo negativo; confira seu ponto.</p></div></section>
-        <section class="rules-note"><h3>Como a conta funciona</h3><p>Trabalho diurno + trabalho noturno convertido.<br>As pausas ficam fora da soma.</p><div><span id="rule-jornada">7h20 de jornada</span><span id="rule-extras">Até 2h00 de extras</span></div></section>
       </aside>
     </div>
-    <footer>Calculadora informativa. Confira as regras da sua escala e os registros oficiais de ponto. Os parâmetros são ajustáveis e não substituem a conferência com o RH.</footer>
+    <section class="card manual-panel" id="manual" aria-labelledby="manual-title" hidden>
+      <h2 id="manual-title">Manual</h2>
+      <h3>Como calcular</h3>
+      <p>Escolha 4 marcações para um intervalo ou 6 para dois. Preencha os horários na ordem em que aconteceram e clique em Calcular saída.</p>
+      <p>Um horário menor que o anterior é interpretado como o dia seguinte. A indicação de dia seguinte no resultado é relativa ao dia da entrada.</p>
+      <h3>Os dois horários</h3>
+      <p>A saída sugerida considera sua jornada. O limite com extras considera a jornada mais as extras configuradas. Ambos são arredondados para baixo e antecipados pela margem definida em Configurações.</p>
+        <section class="safety-note"><span aria-hidden="true">↙</span><div><h3>Uma margem para sair tranquilo</h3><p id="margin-note">Saídas arredondadas para baixo, com 2 minutos de antecedência. A margem pode deixar saldo negativo; confira seu ponto.</p></div></section>
+        <section class="rules-note"><h3>Como a conta funciona</h3><p>Trabalho diurno + trabalho noturno convertido.<br>As pausas ficam fora da soma.</p><div><span id="rule-jornada">7h20 de jornada</span><span id="rule-extras">Até 2h00 de extras</span></div></section>
+      <h3>Hora noturna e intervalos</h3>
+      <p>Com a conversão ativada, cada 52min30s trabalhados entre 22h e 05h equivalem a 60 minutos de jornada. Frações de hora entram proporcionalmente. Intervalos ficam fora da conta.</p>
+      <p>A versão atual usa hora comum após 05h; não aplica automaticamente a redução à prorrogação noturna. Confira a regra aplicável à sua escala.</p>
+      <h3>Conferência do resultado</h3>
+      <p>A margem e o arredondamento podem deixar saldo abaixo da jornada. O resultado é uma estimativa: confira os registros oficiais de ponto. Se as marcações já tiverem ultrapassado os limites, um alerta aparecerá na calculadora.</p>
+      <button type="button" id="voltar-manual">Voltar à calculadora</button>
+    </section>
+    <footer>Calculadora informativa. Confira seu ponto oficial.</footer>
   </main>
   <script type="module" src="js/main.js"></script>
 </body>

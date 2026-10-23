@@ -596,3 +596,19 @@ nav button[aria-expanded="true"] { color: #146554; font-weight: 600; }
 .settings-panel small { color: var(--muted); font-size: 10px; }
 #voltar-calculadora { margin-top: 18px; background: #176b55; color: white; border: 0; }
 @media (max-width: 760px) { nav button { font-size: 10px; } }
+
+/* Explicações completas ficam no Manual. */
+.intro { margin-bottom: 18px; }
+.manual-panel { max-width: 720px; margin: 0 auto; }
+.manual-panel h3 { margin: 22px 0 8px; }
+.manual-panel p { font-size: 13px; line-height: 1.75; color: var(--muted); }
+.manual-panel .safety-note h3 { margin: 0 0 7px; }
+.manual-panel .rules-note { padding: 16px 0; }
+#voltar-manual { margin-top: 18px; background: #176b55; color: white; border: 0; }
+nav button[aria-expanded="true"] { color: #146554; font-weight: 600; }
+.topbar { gap: 16px; }
+@media (max-width: 440px) { .topbar { flex-wrap: wrap; } nav { width: 100%; justify-content: space-between; gap: 12px; } }
+
+/* Os dois horários recebem o mesmo destaque. */
+.limit { display: block; }
+.limit strong { display: block; font-size: 60px; font-weight: 600; letter-spacing: -2px; line-height: 1.15; margin: 8px 0 3px; }
