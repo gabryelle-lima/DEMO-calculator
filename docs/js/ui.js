@@ -15,7 +15,7 @@ export function displayResult(result, config) {
     <div class="result-label">Saída sugerida · ${config.margem} min de margem</div>
     <div class="result-time">${result.saidaSugerida}</div>
     <div class="day-label">${day(result.diaSaida)}</div>
-    <div class="limit"><div><span class="result-label">${result.limiteJaUltrapassado ? 'Limite já ultrapassado' : 'Limite com extras · com margem'}</span><small>${day(result.diaLimite)}</small></div><strong>${result.limiteJaUltrapassado ? '—' : result.horarioLimite}</strong></div>
+    <div class="limit"><div class="result-label">${result.limiteJaUltrapassado ? 'Limite já ultrapassado' : 'Limite com extras · com margem'}</div><strong class="result-time">${result.limiteJaUltrapassado ? '—' : result.horarioLimite}</strong><div class="day-label">${day(result.diaLimite)}</div></div>
     ${warnings.map(text => `<p class="warning">${text}</p>`).join('')}`;
 }
 export function hideResult() {

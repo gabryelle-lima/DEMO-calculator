@@ -608,3 +608,7 @@ nav button[aria-expanded="true"] { color: #146554; font-weight: 600; }
 nav button[aria-expanded="true"] { color: #146554; font-weight: 600; }
 .topbar { gap: 16px; }
 @media (max-width: 440px) { .topbar { flex-wrap: wrap; } nav { width: 100%; justify-content: space-between; gap: 12px; } }
+
+/* Os dois horários recebem o mesmo destaque. */
+.limit { display: block; }
+.limit strong { display: block; font-size: 60px; font-weight: 600; letter-spacing: -2px; line-height: 1.15; margin: 8px 0 3px; }
