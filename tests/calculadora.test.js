@@ -5,14 +5,14 @@ const noMargin = { margem: 0 };
 test('jornada diurna: intervalo excluído e margem de dois minutos', () => {
   const r = calc('08:00', '12:00', '13:00');
   assert.equal(r.saidaSugerida, '16:18');
-  assert.equal(r.horarioLimite, '18:08');
+  assert.equal(r.horarioLimite, '18:18');
   assert.equal(r.minutosIntervalo, 60);
   assert.equal(r.minutosSaida, 438);
 });
 test('jornada noturna exata não perde minuto por ponto flutuante', () => {
   const r = calc('22:00', '01:00', '02:00', null, null, noMargin);
   assert.equal(r.saidaSugerida, '05:28');
-  assert.equal(r.horarioLimite, '07:18');
+  assert.equal(r.horarioLimite, '07:28');
   assert.equal(r.minutosSaida, 3076 / 7);
   assert.equal(r.diaSaida, 1);
 });
@@ -30,7 +30,7 @@ test('arredonda para baixo e calcula limite a partir do total', () => {
 test('margem noturna subtrai minutos reais', () => {
   const r = calc('22:00', '01:00', '02:00');
   assert.equal(r.saidaSugerida, '05:26');
-  assert.equal(r.horarioLimite, '07:16');
+  assert.equal(r.horarioLimite, '07:26');
 });
 test('noturno pode ser desativado e jornada personalizada', () => {
   assert.equal(calc('22:00', '01:00', '02:00', null, null, { noturno: false, margem: 0 }).saidaSugerida, '06:20');
@@ -64,7 +64,7 @@ test('varredura de 288 entradas: saída e limite nunca excedem os alvos', () => 
     const args = [formatTime(entry), formatTime(out), formatTime(back), null, null];
     const raw = calc(...args, noMargin), safe = calc(...args);
     const already = effective(entry, out);
-    for (const [end, target] of [[raw.saidaAbs, 440], [raw.limiteAbs, 550]]) {
+    for (const [end, target] of [[raw.saidaAbs, 440], [raw.limiteAbs, 560]]) {
       assert.ok(already + effective(back, end) <= target * 7);
       assert.ok(already + effective(back, end + 1) > target * 7);
     }
